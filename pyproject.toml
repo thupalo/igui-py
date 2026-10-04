@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "igui"
+version = "3.0.0"
+description = "iGUI - Eco frontend integration for SAP GUI (Python port)"
+authors = [{ name = "Tadeusz Hupało" }]
+requires-python = ">=3.11"
+dependencies = [
+    "PySide6>=6.6",
+    "pywin32>=306",
+    "flask>=3.0",
+    "waitress>=3.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pyinstaller>=6"]
+
+[project.gui-scripts]
+igui = "igui.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+igui = ["resources/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

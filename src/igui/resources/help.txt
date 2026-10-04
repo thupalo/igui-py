@@ -1,0 +1,48 @@
+iGUI v3 Eco Frontend Integration for SAPGui by Tadeusz Hupało
+
+Hotkeys:
+  Ctrl+Alt+I   bring the SAP window to the front
+  Ctrl+Alt+G   start recording the SAP session
+  Ctrl+Alt+H   stop recording (file name is copied to the clipboard)
+
+Commands:
+  _tr=<TCODE>
+  _cmd=<OKCODE>
+  _vkey=<vkey_code>              (see the VKey list, e.g. 0 = Enter, 8 = F8)
+  _pause[=<message>]
+  _screen=<screen_#_for_check>
+  <field>[.text]=<value>
+  <button_or_menu_item>.press
+  <element>.select
+  <element>.setfocus
+  dump                           (alone - saves the screen dump to %TEMP%)
+  Control keys may be numbered to repeat them: _vkey1=0&_vkey2=8
+  In element ids "~" may be used instead of "-".
+
+Control (local only, http://localhost:<port>):
+  POST /go             body: <command>[&command] ...
+  POST /ctx/<macro>    body: <PARAM>=<value>[&...]
+  GET  /iGUI/context.json   macro definitions
+  Body: application/x-www-form-urlencoded, or JSON
+        {"commands": [["_tr","SE16"], ["_vkey","0"]]}
+  Security (igui.toml [security]):
+    - web pages must be listed in allowed_origins
+    - api_token -> send header  X-iGui-Token: <token>
+    - allow_get_actions = true enables legacy GET links
+
+Macro definition (igui.toml [macros] url / file), example JSON:
+{
+  "l": [
+    {
+      "transaction": "SE16",
+      "screen": 230,
+      "id": "TABLE",
+      "name": "Data Browser - table",
+      "link": "_tr=SE16&usr/ctxtDATABROWSE~TABLENAME.text=%TABLE%&_vkey=0",
+      "params": [ "usr/ctxtDATABROWSE~TABLENAME" ]
+    }
+  ]
+}
+
+curl -X POST http://localhost:50501/ctx/TABLE -d TABLE=MARA
+curl -X POST http://localhost:50501/go -d "_tr=SE16&_screen=230&usr/ctxtDATABROWSE~TABLENAME=MARA&_vkey=0"

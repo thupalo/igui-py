@@ -1,0 +1,20 @@
+{
+  "l": [
+    {
+      "transaction": "SE16",
+      "screen": 230,
+      "id": "TABLE",
+      "name": "Data Browser - table",
+      "link": "_tr=SE16&usr/ctxtDATABROWSE~TABLENAME.text=%TABLE%&_vkey=0",
+      "params": ["usr/ctxtDATABROWSE~TABLENAME"]
+    },
+    {
+      "transaction": "SE38",
+      "screen": 100,
+      "id": "PROGRAM",
+      "name": "ABAP Editor - program",
+      "link": "_tr=SE38&usr/ctxtRS38M~PROGRAMM.text=%PROGRAM%",
+      "params": ["usr/ctxtRS38M~PROGRAMM"]
+    }
+  ]
+}

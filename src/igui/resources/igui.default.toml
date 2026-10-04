@@ -1,0 +1,47 @@
+# iGUI default configuration.
+#
+# Override any value by creating (only the keys you want to change):
+#   <install dir>\igui.toml         - machine-wide (deployed by admin)
+#   %APPDATA%\iGui\igui.toml        - per user (takes precedence)
+
+[sap]
+# SAP system ID the commands are sent to.
+sid = "DEV"
+# Suppress SAP GUI's "a script is attaching" warning (HKCU registry value
+# WarnOnAttach=0).  iGUI 2.x always did this.  Set to false to keep SAP's
+# warning - more secure, but users will be asked on every request.
+suppress_attach_warning = true
+
+[server]
+# The API only ever listens on the loopback interface (127.0.0.1 / ::1).
+port = 50501
+
+[macros]
+# Where to load macro (context) definitions from.  Use either a URL (https
+# recommended) or a file.  Empty url + empty file = bundled defaults.
+url = ""
+file = ""
+
+[recorder]
+# Directory for recordings.  Empty = %USERPROFILE%\Documents\iGui\recordings
+directory = ""
+
+[security]
+# Browser origins (scheme://host[:port]) allowed to call /go and /ctx.
+# Requests from any other web page are rejected (CSRF protection).
+# Native clients (scripts, desktop apps) send no Origin and are not affected.
+allowed_origins = []
+
+# Shared secret.  When set, /go and /ctx require it in the "X-iGui-Token"
+# header (or "Authorization: Bearer <token>", or a "_token" form field).
+api_token = ""
+
+# Legacy iGUI 2.x mode: allow commands via GET (plain links).  GET requests
+# can be triggered by any web page, so keep this off unless callers still
+# rely on links.  Cross-site GETs are still checked against allowed_origins.
+allow_get_actions = false
+
+# Input limits.
+max_commands = 50
+max_value_length = 1024
+max_body_bytes = 16384

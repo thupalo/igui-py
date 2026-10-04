@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+build/
+dist/
+.pytest_cache/
+*.egg-info/
+
+# site-specific configuration (see igui.example.toml)
+/igui.toml
+/macros.json

@@ -1,0 +1,16 @@
+# Example site configuration.  Copy to igui.toml (next to iGui.exe, or to
+# %APPDATA%\iGui\igui.toml) and adjust.  igui.toml and macros.json are not
+# committed - they contain site-specific data.
+
+[sap]
+sid = "DEV"
+
+[macros]
+# Macro definitions (relative to this file); see src/igui/resources/macros.default.json
+file = "macros.json"
+
+[security]
+# Allow plain GET links such as  wget -q -O nul http://localhost:50501/go?_tr=SE38
+# Native clients (wget, curl, scripts) are allowed; cross-site requests from
+# web pages are still rejected via Origin / Referer / Sec-Fetch-Site checks.
+allow_get_actions = true
